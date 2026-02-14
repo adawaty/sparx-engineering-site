@@ -185,6 +185,7 @@
   .nb-hover-lift, .nb-hover-lift:hover { transition: none; transform: none; }
   .facts-bar { width: 38% !important; animation: none !important; }
   .marquee-track { animation: none !important; transform: none !important; }
+  .cta-shine::after { animation: none !important; display: none !important; }
 }
 
 .clip-diagonal {
@@ -198,6 +199,29 @@
 .marquee { overflow: hidden; }
 .marquee-track { display: flex; width: max-content; gap: 3.5rem; will-change: transform; }
 .marquee-item { display: inline-flex; align-items: center; }
+
+/* CTA shine (subtle, neobrutalist-friendly) */
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cta-shine::after {
+    content: "";
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.55) 50%, transparent 65%);
+    transform: translateX(-60%) rotate(8deg);
+    animation: cta-shine-sweep 3.2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes cta-shine-sweep {
+    0% { transform: translateX(-60%) rotate(8deg); opacity: 0; }
+    12% { opacity: 1; }
+    35% { transform: translateX(60%) rotate(8deg); opacity: 0.9; }
+    100% { transform: translateX(60%) rotate(8deg); opacity: 0; }
+  }
+}
 
 /* Firefighting ambient effects */
 @media (prefers-reduced-motion: no-preference) {

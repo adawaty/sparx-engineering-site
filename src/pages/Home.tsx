@@ -12,8 +12,8 @@ import heroImg from '../assets/hero-engineering-banner.jpeg';
 import fireExtImg from '../assets/fire-extinguisher-product.jpeg';
 import alarmPanelImg from '../assets/fire-alarm-panel.jpeg';
 import projectImg from '../assets/project-textile-factory.jpeg';
-import logoMeteory from '../assets/meteory-logo.png';
-import logoApollo from '../assets/apollo-logo.png';
+const logoMeteory = `${import.meta.env.BASE_URL}brands/meteory-logo.png`;
+const logoApollo  = `${import.meta.env.BASE_URL}brands/apollo-logo.png`;
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -51,8 +51,12 @@ export default function Home() {
               <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white font-bold uppercase tracking-wider px-8 h-14 text-base rounded-none clip-diagonal" asChild>
                 <Link href="/products">{t('get_quote')}</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-bold uppercase tracking-wider px-8 h-14 text-base rounded-none" asChild>
-                <Link href="/services">{t('read_more')}</Link>
+              <Button
+                size="lg"
+                className="bg-white text-zinc-900 hover:bg-white/90 font-bold uppercase tracking-wider px-8 h-14 text-base rounded-none border border-white/30 shadow-xl transition-transform duration-300 hover:-translate-y-0.5 active:translate-y-0 cta-shine"
+                asChild
+              >
+                <Link href="/services">{t('nav_services') || (language === 'ar' ? 'الخدمات' : 'Services')}</Link>
               </Button>
             </div>
           </div>

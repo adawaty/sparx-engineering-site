@@ -204,10 +204,10 @@ export default function Portfolio() {
           <div className="mt-10 grid lg:grid-cols-2 gap-8 items-center">
             <div className="grid grid-cols-3 gap-6 items-center">
               <div className="nb-card-sm p-4 flex items-center justify-center">
-                <img src="/src/assets/meteory-logo.png" alt="Meteory" className="max-h-10 w-auto" />
+                <img src={`${import.meta.env.BASE_URL}brands/meteory-logo.png`} alt="Meteory" className="max-h-10 w-auto" loading="lazy" />
               </div>
               <div className="nb-card-sm p-4 flex items-center justify-center">
-                <img src="/src/assets/apollo-logo.png" alt="Apollo" className="max-h-10 w-auto" />
+                <img src={`${import.meta.env.BASE_URL}brands/apollo-logo.png`} alt="Apollo" className="max-h-10 w-auto" loading="lazy" />
               </div>
               <div className="nb-card-sm p-4 flex items-center justify-center">
                 <img src="/src/assets/sri-logo.png" alt="SRI" className="max-h-10 w-auto" />
