@@ -170,6 +170,11 @@
 /* Facts infographic progress bar animation */
 @media (prefers-reduced-motion: no-preference) {
   .facts-bar { animation: facts-fill 1200ms ease-out 1 both; }
+  .marquee-track { animation: marquee-x 22s linear infinite; }
+  @keyframes marquee-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
   @keyframes facts-fill {
     from { width: 0%; }
     to { width: 38%; }
@@ -179,6 +184,7 @@
 @media (prefers-reduced-motion: reduce) {
   .nb-hover-lift, .nb-hover-lift:hover { transition: none; transform: none; }
   .facts-bar { width: 38% !important; animation: none !important; }
+  .marquee-track { animation: none !important; transform: none !important; }
 }
 
 .clip-diagonal {
@@ -187,6 +193,11 @@
 .clip-diagonal-reverse {
   clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
 }
+
+/* Marquee */
+.marquee { overflow: hidden; }
+.marquee-track { display: flex; width: max-content; gap: 3.5rem; will-change: transform; }
+.marquee-item { display: inline-flex; align-items: center; }
 
 /* Firefighting ambient effects */
 @media (prefers-reduced-motion: no-preference) {

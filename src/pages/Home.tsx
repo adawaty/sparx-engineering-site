@@ -58,15 +58,39 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Scrolling Partner Logos at Bottom */}
-        <div className="absolute bottom-0 w-full bg-white/5 backdrop-blur-sm border-t border-white/10 py-6">
-           <div className="container mx-auto px-4 flex justify-between items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-              <img src={logoMeteory} alt="Meteory" className="h-10 w-auto object-contain" />
-              <img src={logoApollo} alt="Apollo" className="h-10 w-auto object-contain" />
-              <div className="h-8 font-display font-bold text-2xl text-white tracking-widest uppercase">SRI Malaysia</div>
-              <div className="h-8 font-display font-bold text-2xl text-white tracking-widest uppercase">NAFFCO</div>
-              <div className="h-8 font-display font-bold text-2xl text-white tracking-widest uppercase">BAVARIA</div>
-           </div>
+        {/* Partner strip (mobile-safe marquee) */}
+        <div className="absolute bottom-0 w-full border-t border-white/10 bg-black/35 py-4">
+          <div className="marquee container mx-auto px-4">
+            <div className="marquee-track opacity-80">
+              {[
+                { type: 'img', src: logoMeteory, label: 'Meteory' },
+                { type: 'img', src: logoApollo, label: 'Apollo' },
+                { type: 'text', label: 'SRI Malaysia' },
+                { type: 'text', label: 'NAFFCO' },
+                { type: 'text', label: 'BAVARIA' },
+              ].concat([
+                { type: 'img', src: logoMeteory, label: 'Meteory' },
+                { type: 'img', src: logoApollo, label: 'Apollo' },
+                { type: 'text', label: 'SRI Malaysia' },
+                { type: 'text', label: 'NAFFCO' },
+                { type: 'text', label: 'BAVARIA' },
+              ]).map((p, i) => (
+                <div key={i} className="marquee-item">
+                  {p.type === 'img' ? (
+                    <img
+                      src={p.src}
+                      alt={p.label}
+                      className="h-8 w-auto object-contain"
+                      loading="lazy"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  ) : (
+                    <span className="font-display font-bold text-xl text-white tracking-widest uppercase">{p.label}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
