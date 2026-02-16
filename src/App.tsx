@@ -2,19 +2,18 @@ import { LanguageProvider, useLanguage } from "@/contexts/LanguageContext";
 import { Router, Route, Switch, useLocation } from "wouter";
 import { useHashLocation } from "wouter/use-hash-location";
 import { Navigation, Footer } from "@/components/Layout";
-import { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 
-// Page Imports
-import Home from "@/pages/Home";
-import About from "@/pages/About";
-import Services from "@/pages/Services";
-import Products from "@/pages/Products";
-import Projects from "@/pages/Projects";
-import Contact from "@/pages/Contact";
-import CalculatorPage from "@/pages/Calculator";
-import Portfolio from "@/pages/Portfolio";
-import AdminLogin from "@/pages/AdminLogin";
-import AdminDashboard from "@/pages/AdminDashboard";
+const Home = React.lazy(() => import("@/pages/Home"));
+const About = React.lazy(() => import("@/pages/About"));
+const Services = React.lazy(() => import("@/pages/Services"));
+const Products = React.lazy(() => import("@/pages/Products"));
+const Projects = React.lazy(() => import("@/pages/Projects"));
+const Portfolio = React.lazy(() => import("@/pages/Portfolio"));
+const CalculatorPage = React.lazy(() => import("@/pages/Calculator"));
+const Contact = React.lazy(() => import("@/pages/Contact"));
+const AdminLogin = React.lazy(() => import("@/pages/AdminLogin"));
+const AdminDashboard = React.lazy(() => import("@/pages/AdminDashboard"));
 
 function ScrollHandler() {
   const [location] = useLocation();
@@ -78,8 +77,22 @@ export default function App() {
         <div className="flex flex-col min-h-screen bg-background text-foreground font-sans">
           <Navigation />
           <main className="flex-grow">
-            <Switch>
-              <Route path="/" component={Home} />
+            <Suspense
+              fallback={
+                <div className="min-h-[60vh] flex items-center justify-center">
+                  <div className="nb-card px-8 py-6 bg-white">
+                    <div className="text-sm font-bold uppercase tracking-[0.22em] text-primary">
+                      Loading…
+                    </div>
+                    <div className="mt-3 h-2 w-48 bg-zinc-100 border-2 border-[var(--nb-stroke)] overflow-hidden">
+                      <div className="h-full w-1/2 bg-secondary animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              }
+            >
+                <Switch>
+                <Route path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/services" component={Services} />
               <Route path="/products" component={Products} />
@@ -96,7 +109,8 @@ export default function App() {
                   <p className="text-lg text-muted-foreground">The page you are looking for does not exist.</p>
                 </div>
               </Route>
-            </Switch>
+              </Switch>
+            </Suspense>
           </main>
           <Footer />
         </div>

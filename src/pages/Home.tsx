@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { ArrowRight, ShieldCheck, Flame, Zap, HardHat, FileCheck, TrendingUp, Timer, Building2, Wrench, Users } from 'lucide-react';
 import { CountUp } from '@/components/CountUp';
+import { motion } from 'framer-motion';
 import { FM200Calculator } from '@/components/FM200Calculator';
 import { FireEmbers, WaterMist } from '@/components/FireEffects';
 
@@ -17,7 +18,22 @@ const logoApollo  = `${import.meta.env.BASE_URL}brands/apollo-logo.png`;
 
 export default function Home() {
   const { t, language } = useLanguage();
-  const yearsOperating = Math.max(1, new Date().getFullYear() - 2018);
+
+  // Facts & Figures are presented "as of February 2026" (snapshot) for consistency.
+  const asOf = useMemo(() => new Date('2026-02-01T00:00:00Z'), []);
+  const yearsOperating = Math.max(1, asOf.getUTCFullYear() - 2018);
+
+  const facts = useMemo(
+    () => ({
+      totalProjects: 350,
+      maintenanceStandard: 'ISO 9001:2015',
+      codeReference: 'NFPA 2001',
+      coverage: { en: 'Across Egypt', ar: 'داخل مصر' },
+      location: { en: '10th of Ramadan City — Industrial Zone', ar: 'مدينة العاشر من رمضان — المنطقة الصناعية' },
+      asOfLabel: { en: 'As of Feb 2026', ar: 'حتى فبراير 2026' }
+    }),
+    []
+  );
 
   const factsRef = useRef<HTMLElement | null>(null);
   const [factsInView, setFactsInView] = useState(false);
@@ -185,30 +201,46 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-display font-bold text-primary uppercase">
                 {language === 'ar' ? `صورة سريعة عن ${yearsOperating} سنوات` : `A ${yearsOperating}-Year Snapshot`}
               </h2>
+              <div className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.24em] text-primary/80">
+                <span className="h-2 w-2 bg-secondary border border-primary nb-shadow-sm" />
+                <span>{language === 'ar' ? facts.asOfLabel.ar : facts.asOfLabel.en}</span>
+              </div>
               <p className="text-gray-600 leading-relaxed text-lg">
                 {language === 'ar'
-                  ? `نظرة مختصرة على مسار التنفيذ منذ 2018 — أرقام معلنة على الموقع لتوضيح حجم النشاط.`
-                  : `A compact view of delivery activity since 2018 — site-stated figures to communicate scale.`}
+                  ? 'نظرة مختصرة على مسار التنفيذ منذ 2018 — أرقام مختارة لتوضيح حجم النشاط.'
+                  : 'A compact view of delivery activity since 2018 — a curated snapshot of scale.'}
               </p>
             </div>
 
-            <div className="text-xs text-muted-foreground border border-zinc-200 bg-zinc-50 px-4 py-3">
+            <div className="text-xs text-muted-foreground border-2 border-[var(--nb-stroke)] bg-white px-4 py-3 nb-shadow">
               <strong className="text-primary">{language === 'ar' ? 'الموقع:' : 'Location:'}</strong>{' '}
-              {language === 'ar' ? 'مدينة العاشر من رمضان — المنطقة الصناعية' : '10th of Ramadan City — Industrial Zone'}
+              {language === 'ar' ? facts.location.ar : facts.location.en}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-12 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="grid md:grid-cols-12 gap-6"
+          >
             {/* Big metric */}
-            <div className="md:col-span-5 nb-card nb-hover-lift overflow-hidden">
+            <motion.div
+              initial={{ opacity: 0, x: -14, rotate: -0.15 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+              viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="md:col-span-5 nb-card nb-hover-lift overflow-hidden"
+            >
               <div className="p-8">
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                      {language === 'ar' ? 'إجمالي المشاريع (مُعلن)' : 'Total Projects (stated)'}
+                      {language === 'ar' ? 'إجمالي المشاريع' : 'Total Projects'}
                     </div>
                     <div className="mt-3 text-6xl font-display font-bold text-primary leading-none">
-                      <CountUp value={350} suffix="+" start={factsInView} />
+                      <CountUp value={facts.totalProjects} suffix="+" start={factsInView} />
                     </div>
                   </div>
                   <div className="w-14 h-14 border border-secondary/30 bg-secondary/10 flex items-center justify-center">
@@ -229,11 +261,17 @@ export default function Home() {
               <div className="h-2 bg-zinc-100">
                 <div className="facts-bar h-2 bg-secondary w-[0%]"></div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Grid metrics */}
             <div className="md:col-span-7 grid sm:grid-cols-2 gap-6">
-              <div className="nb-card-sm nb-hover-lift p-7">
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="nb-card-sm nb-hover-lift p-7"
+              >
                 <div className="flex items-center justify-between">
                   <div className="text-4xl font-display font-bold text-primary"><CountUp value={yearsOperating} start={factsInView} /></div>
                   <Timer className="w-6 h-6 text-secondary" />
@@ -244,11 +282,17 @@ export default function Home() {
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar' ? 'خبرة تراكمية في بيئات صناعية مختلفة منذ 2018.' : 'Accumulated delivery experience across multiple industrial environments since 2018.'}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="border border-zinc-200 bg-white p-7">
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.55, delay: 0.10, ease: [0.22, 1, 0.36, 1] }}
+                className="border-3 border-[var(--nb-stroke)] bg-white p-7 nb-hover-lift"
+              >
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary">NFPA</div>
+                  <div className="text-4xl font-display font-bold text-primary">{facts.codeReference}</div>
                   <ShieldCheck className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
@@ -256,29 +300,41 @@ export default function Home() {
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'تقديرات FM‑200 مبنية على NFPA 2001 (حسب وصف الأداة).' 
-                    : 'FM‑200 estimations based on NFPA 2001 (per the tool description).'}
+                    ? 'تقديرات FM‑200 مبنية على NFPA 2001.'
+                    : 'FM‑200 estimations based on NFPA 2001.'}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="border border-zinc-200 bg-white p-7">
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.55, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="border-3 border-[var(--nb-stroke)] bg-white p-7 nb-hover-lift"
+              >
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary">ISO</div>
+                  <div className="text-4xl font-display font-bold text-primary">{facts.maintenanceStandard}</div>
                   <Wrench className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {language === 'ar' ? 'الجودة (مُعلن)' : 'Quality (stated)'}
+                  {language === 'ar' ? 'الجودة' : 'Quality'}
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'ISO 9001:2015 — مذكور في الموقع.'
-                    : 'ISO 9001:2015 — stated on the website.'}
+                    ? 'ISO 9001:2015 (اعتماد جودة).' 
+                    : 'ISO 9001:2015 quality certification.'}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="border border-zinc-200 bg-white p-7">
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.55, delay: 0.20, ease: [0.22, 1, 0.36, 1] }}
+                className="border-3 border-[var(--nb-stroke)] bg-white p-7 nb-hover-lift"
+              >
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary">EG</div>
+                  <div className="text-4xl font-display font-bold text-primary">{language === 'ar' ? 'مصر' : 'EG'}</div>
                   <Flame className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
@@ -286,17 +342,17 @@ export default function Home() {
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'تنفيذ مشاريع داخل مصر (حسب وصف الموقع).' 
-                    : 'Projects delivered across Egypt (per the website statement).'}
+                    ? `تنفيذ مشاريع ${facts.coverage.ar}.`
+                    : `Projects delivered ${facts.coverage.en}.`}
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           <div className="mt-10 text-xs text-muted-foreground">
             {language === 'ar'
-              ? 'ملاحظة: تم استخدام الأرقام والمعلومات كما هي مُعلنة على الموقع، ويمكن استبدالها ببيانات موثّقة (شهادات/سجل مشاريع) عند توفرها.'
-              : 'Note: figures above reflect what is stated on the website; we can replace them with fully verified data (certificates/project register) once provided.'}
+              ? `ملاحظة: هذه لقطة موجزة حتى فبراير 2026 ويمكن تحديثها عند توفر بيانات تفصيلية (سجل مشاريع/شهادات).`
+              : `Note: this is a brief snapshot as of Feb 2026 and can be updated once detailed evidence is provided (project register/certificates).`}
           </div>
         </div>
       </section>

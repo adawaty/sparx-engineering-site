@@ -42,14 +42,14 @@
 :root {
   --radius: 0rem;
 
-  /* Subtle neobrutalist system */
-  --nb-stroke: oklch(0.20 0.02 260);
-  --nb-shadow: 0.45rem 0.45rem 0 var(--nb-stroke);
-  --nb-shadow-sm: 0.25rem 0.25rem 0 var(--nb-stroke);
-  --nb-shadow-lg: 0.7rem 0.7rem 0 var(--nb-stroke);
-  --nb-paper: oklch(0.99 0.004 260);
-  --nb-paper-2: oklch(0.97 0.008 260);
-  --nb-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+  /* Aggressive neobrutalist system (industrial) */
+  --nb-stroke: oklch(0.16 0.03 260);
+  --nb-shadow: 0.65rem 0.65rem 0 var(--nb-stroke);
+  --nb-shadow-sm: 0.35rem 0.35rem 0 var(--nb-stroke);
+  --nb-shadow-lg: 0.95rem 0.95rem 0 var(--nb-stroke);
+  --nb-paper: oklch(1 0 0);
+  --nb-paper-2: oklch(0.985 0.004 260);
+  --nb-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
   
   --background: oklch(1 0 0);
   --foreground: oklch(0.15 0.02 260);
@@ -138,32 +138,32 @@
 
 /* Subtle neobrutalist utilities */
 .nb-card {
-  border: 2px solid var(--nb-stroke);
+  border: 3px solid var(--nb-stroke);
   box-shadow: var(--nb-shadow);
   background: var(--nb-paper);
 }
 .nb-card-sm {
-  border: 2px solid var(--nb-stroke);
+  border: 3px solid var(--nb-stroke);
   box-shadow: var(--nb-shadow-sm);
   background: var(--nb-paper);
 }
 .nb-panel {
-  border: 2px solid var(--nb-stroke);
+  border: 3px solid var(--nb-stroke);
   background: var(--nb-paper);
 }
 .nb-chip {
-  border: 2px solid var(--nb-stroke);
+  border: 3px solid var(--nb-stroke);
   background: var(--nb-paper-2);
 }
 .nb-divider {
-  height: 2px;
+  height: 3px;
   background: var(--nb-stroke);
 }
 .nb-hover-lift {
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
 .nb-hover-lift:hover {
-  transform: translate(-2px, -2px);
+  transform: translate(-4px, -4px) rotate(-0.25deg);
   box-shadow: var(--nb-shadow-lg);
 }
 
@@ -171,6 +171,14 @@
 @media (prefers-reduced-motion: no-preference) {
   .facts-bar { animation: facts-fill 1200ms ease-out 1 both; }
   .marquee-track { animation: marquee-x 22s linear infinite; }
+
+  /* Brutal micro-motions */
+  .nb-pulse { animation: nb-pulse 1600ms ease-in-out infinite; }
+  @keyframes nb-pulse {
+    0%, 100% { transform: translateZ(0) scale(1); filter: saturate(1); }
+    50% { transform: translateZ(0) scale(1.02); filter: saturate(1.12); }
+  }
+
   @keyframes marquee-x {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
