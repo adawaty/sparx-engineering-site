@@ -29,18 +29,21 @@ export function CountUp({
   value,
   suffix = '',
   durationMs = 900,
-  className = ''
+  className = '',
+  start
 }: {
   value: number;
   suffix?: string;
   durationMs?: number;
   className?: string;
+  start?: boolean;
 }) {
   const { ref, inView } = useInViewOnce<HTMLSpanElement>();
+  const shouldStart = start ?? inView;
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!shouldStart) return;
 
     const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
     if (prefersReduced) {
@@ -61,7 +64,7 @@ export function CountUp({
     };
 
     requestAnimationFrame(tick);
-  }, [inView, value, durationMs]);
+  }, [shouldStart, value, durationMs]);
 
   return (
     <span ref={ref} className={className}>

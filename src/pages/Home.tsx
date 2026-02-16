@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -17,6 +17,28 @@ const logoApollo  = `${import.meta.env.BASE_URL}brands/apollo-logo.png`;
 
 export default function Home() {
   const { t, language } = useLanguage();
+  const yearsOperating = Math.max(1, new Date().getFullYear() - 2018);
+
+  const factsRef = useRef<HTMLElement | null>(null);
+  const [factsInView, setFactsInView] = useState(false);
+
+  useEffect(() => {
+    const el = factsRef.current;
+    if (!el || factsInView) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setFactsInView(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [factsInView]);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -149,7 +171,7 @@ export default function Home() {
       </section>
 
       {/* Facts & Figures - Infographic */}
-      <section className="py-24 bg-white border-t-2 border-[var(--nb-stroke)] relative overflow-hidden">
+      <section ref={factsRef} className="py-24 bg-white border-t-2 border-[var(--nb-stroke)] relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(11,31,59,0.25)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,59,0.25)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
         <div className="container mx-auto px-4 max-w-7xl relative">
           <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 mb-12">
@@ -161,18 +183,18 @@ export default function Home() {
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-display font-bold text-primary uppercase">
-                {language === 'ar' ? 'صورة سريعة عن 7 سنوات' : 'A 7‑Year Snapshot'}
+                {language === 'ar' ? `صورة سريعة عن ${yearsOperating} سنوات` : `A ${yearsOperating}-Year Snapshot`}
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
                 {language === 'ar'
-                  ? 'نظرة مختصرة على مسار التنفيذ خلال 7 سنوات — أرقام بسيطة لتوضيح حجم النشاط.'
-                  : 'A compact view of delivery activity over 7 years — simple numbers to communicate scale.'}
+                  ? `نظرة مختصرة على مسار التنفيذ منذ 2018 — أرقام معلنة على الموقع لتوضيح حجم النشاط.`
+                  : `A compact view of delivery activity since 2018 — site-stated figures to communicate scale.`}
               </p>
             </div>
 
             <div className="text-xs text-muted-foreground border border-zinc-200 bg-zinc-50 px-4 py-3">
-              <strong className="text-primary">{language === 'ar' ? 'متوسط التنفيذ:' : 'Delivery pace:'}</strong>{' '}
-              {language === 'ar' ? 'حوالي 4 مشاريع سنوياً.' : 'About 4 projects per year.'}
+              <strong className="text-primary">{language === 'ar' ? 'الموقع:' : 'Location:'}</strong>{' '}
+              {language === 'ar' ? 'مدينة العاشر من رمضان — المنطقة الصناعية' : '10th of Ramadan City — Industrial Zone'}
             </div>
           </div>
 
@@ -183,10 +205,10 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                      {language === 'ar' ? 'إجمالي المشاريع' : 'Total Projects'}
+                      {language === 'ar' ? 'إجمالي المشاريع (مُعلن)' : 'Total Projects (stated)'}
                     </div>
                     <div className="mt-3 text-6xl font-display font-bold text-primary leading-none">
-                      <CountUp value={28} />
+                      <CountUp value={350} suffix="+" start={factsInView} />
                     </div>
                   </div>
                   <div className="w-14 h-14 border border-secondary/30 bg-secondary/10 flex items-center justify-center">
@@ -196,11 +218,11 @@ export default function Home() {
                 <div className="mt-6 grid grid-cols-2 gap-4 text-sm text-zinc-600">
                   <div className="flex items-center gap-3">
                     <Building2 className="w-5 h-5 text-secondary" />
-                    <span>{language === 'ar' ? 'مصانع، مخازن، مجمعات صناعية' : 'Factories, warehouses, industrial sites'}</span>
+                    <span>{language === 'ar' ? 'مشاريع في مصانع ومخازن ومواقع صناعية' : 'Projects across factories, warehouses, industrial sites'}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <ShieldCheck className="w-5 h-5 text-secondary" />
-                    <span>{language === 'ar' ? 'إنذار + مكافحة + صيانة' : 'Alarm + firefighting + maintenance'}</span>
+                    <span>{language === 'ar' ? 'إنذار + مكافحة + صيانة (حلول متكاملة)' : 'Alarm + firefighting + maintenance (integrated)'}</span>
                   </div>
                 </div>
               </div>
@@ -213,59 +235,59 @@ export default function Home() {
             <div className="md:col-span-7 grid sm:grid-cols-2 gap-6">
               <div className="nb-card-sm nb-hover-lift p-7">
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary"><CountUp value={7} /></div>
+                  <div className="text-4xl font-display font-bold text-primary"><CountUp value={yearsOperating} start={factsInView} /></div>
                   <Timer className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {language === 'ar' ? 'سنوات تشغيل' : 'Years Operating'}
+                  {language === 'ar' ? 'سنوات تشغيل (منذ 2018)' : 'Years Operating (since 2018)'}
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
-                  {language === 'ar' ? 'خبرة تراكمية في بيئات صناعية مختلفة.' : 'Accumulated delivery experience across multiple industrial environments.'}
+                  {language === 'ar' ? 'خبرة تراكمية في بيئات صناعية مختلفة منذ 2018.' : 'Accumulated delivery experience across multiple industrial environments since 2018.'}
                 </div>
               </div>
 
               <div className="border border-zinc-200 bg-white p-7">
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary"><CountUp value={8} /></div>
-                  <Users className="w-6 h-6 text-secondary" />
+                  <div className="text-4xl font-display font-bold text-primary">NFPA</div>
+                  <ShieldCheck className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {language === 'ar' ? 'فريق التنفيذ' : 'Delivery Team'}
+                  {language === 'ar' ? 'مرجعية كودية' : 'Code Reference'}
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'مهندسون + فنيون + إشراف موقع.'
-                    : 'Engineers + technicians + site supervision.'}
+                    ? 'تقديرات FM‑200 مبنية على NFPA 2001 (حسب وصف الأداة).' 
+                    : 'FM‑200 estimations based on NFPA 2001 (per the tool description).'}
                 </div>
               </div>
 
               <div className="border border-zinc-200 bg-white p-7">
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary"><CountUp value={92} suffix="%" /></div>
+                  <div className="text-4xl font-display font-bold text-primary">ISO</div>
                   <Wrench className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {language === 'ar' ? 'التزام الصيانة' : 'Maintenance SLA'}
+                  {language === 'ar' ? 'الجودة (مُعلن)' : 'Quality (stated)'}
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'نسبة زيارات الصيانة المنفذة ضمن الجدول.'
-                    : 'Planned maintenance visits completed on schedule.'}
+                    ? 'ISO 9001:2015 — مذكور في الموقع.'
+                    : 'ISO 9001:2015 — stated on the website.'}
                 </div>
               </div>
 
               <div className="border border-zinc-200 bg-white p-7">
                 <div className="flex items-center justify-between">
-                  <div className="text-4xl font-display font-bold text-primary"><CountUp value={24} suffix="h" /></div>
+                  <div className="text-4xl font-display font-bold text-primary">EG</div>
                   <Flame className="w-6 h-6 text-secondary" />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                  {language === 'ar' ? 'زمن استجابة' : 'Response Time'}
+                  {language === 'ar' ? 'نطاق الخدمة' : 'Service Coverage'}
                 </div>
                 <div className="mt-4 text-sm text-zinc-600">
                   {language === 'ar'
-                    ? 'نافذة استجابة للطوارئ حسب التعاقد.'
-                    : 'Emergency response window depending on contract.'}
+                    ? 'تنفيذ مشاريع داخل مصر (حسب وصف الموقع).' 
+                    : 'Projects delivered across Egypt (per the website statement).'}
                 </div>
               </div>
             </div>
@@ -273,8 +295,8 @@ export default function Home() {
 
           <div className="mt-10 text-xs text-muted-foreground">
             {language === 'ar'
-              ? 'يمكن إضافة توزيع تفاعلي حسب القطاعات عند توفر بيانات تفصيلية (مصانع/مخازن/مكاتب/مراكز بيانات).' 
-              : 'We can add an interactive sector breakdown once detailed data is available (factories/warehouses/offices/data centers).'}
+              ? 'ملاحظة: تم استخدام الأرقام والمعلومات كما هي مُعلنة على الموقع، ويمكن استبدالها ببيانات موثّقة (شهادات/سجل مشاريع) عند توفرها.'
+              : 'Note: figures above reflect what is stated on the website; we can replace them with fully verified data (certificates/project register) once provided.'}
           </div>
         </div>
       </section>
