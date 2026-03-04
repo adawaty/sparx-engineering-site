@@ -62,7 +62,7 @@ export default function Home() {
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden bg-zinc-900 text-white">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img src={heroImg} alt="Industrial Fire Safety" className="w-full h-full object-cover opacity-60" />
+          <img src={heroImg} alt="Industrial Fire Safety" loading="eager" decoding="async" fetchPriority="high" className="w-full h-full object-cover opacity-60" />
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-900/80 to-transparent"></div>
         </div>
 
@@ -142,7 +142,7 @@ export default function Home() {
            <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative">
                  <div className="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-secondary hidden md:block"></div>
-                 <img src={projectImg} alt="Our Project" className="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-500" />
+                 <img src={projectImg} alt="Our Project" loading="lazy" decoding="async" className="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-500" />
                  <div className="absolute -bottom-8 -right-8 bg-primary p-8 text-white max-w-xs shadow-xl hidden md:block">
                     <div className="text-4xl font-bold font-display mb-2">350+</div>
                     <div className="text-sm text-gray-300 uppercase tracking-wider">Successful Projects Completed Across Egypt</div>
@@ -231,7 +231,7 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0, rotate: 0 }}
               viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="md:col-span-5 nb-card nb-hover-lift overflow-hidden"
+              className="md:col-span-5 nb-card nb-hover-lift nb-jitter overflow-hidden"
             >
               <div className="p-8">
                 <div className="flex items-center justify-between">
@@ -270,7 +270,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
                 transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="nb-card-sm nb-hover-lift p-7"
+                className="nb-card-sm nb-hover-lift nb-jitter p-7"
               >
                 <div className="flex items-center justify-between">
                   <div className="text-4xl font-display font-bold text-primary"><CountUp value={yearsOperating} start={factsInView} /></div>
@@ -369,7 +369,7 @@ export default function Home() {
                {/* Card 1 */}
                <div className="group nb-card nb-hover-lift hover:border-secondary transition-all duration-300 relative overflow-hidden">
                   <div className="h-64 overflow-hidden">
-                     <img src={fireExtImg} alt="Fire Fighting" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                     <img src={fireExtImg} alt="Fire Fighting" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="p-8 relative z-10 bg-white">
                      <div className="absolute -top-8 right-8 bg-secondary text-white p-4 shadow-lg">
@@ -390,7 +390,7 @@ export default function Home() {
                {/* Card 2 */}
                <div className="group nb-card nb-hover-lift hover:border-secondary transition-all duration-300 relative overflow-hidden">
                   <div className="h-64 overflow-hidden">
-                     <img src={alarmPanelImg} alt="Fire Alarm" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                     <img src={alarmPanelImg} alt="Fire Alarm" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="p-8 relative z-10 bg-white">
                      <div className="absolute -top-8 right-8 bg-secondary text-white p-4 shadow-lg">
