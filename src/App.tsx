@@ -47,6 +47,37 @@ function SeoManager() {
 
     document.title = titleMap[location] || 'Sparx Engineering';
 
+    // Descriptions per route
+    const descMap: Record<string, string> = {
+      '/': language === 'ar'
+        ? 'حلول إنذار ومكافحة الحريق في مصر — تصميم، توريد، تركيب، اختبار، تشغيل وصيانة.'
+        : 'Fire alarm and firefighting solutions across Egypt — design, supply, installation, testing, commissioning, and maintenance.',
+      '/services': language === 'ar'
+        ? 'الخدمات: التصميم الهندسي، التوريد، التركيب والتشغيل، والصيانة الدورية لأنظمة مكافحة الحريق.'
+        : 'Services: engineering design, supply, installation & commissioning, and preventive maintenance for fire protection systems.',
+      '/products': language === 'ar'
+        ? 'معدات مكافحة الحريق والإنذار — توريد منتجات معتمدة وحلول متكاملة للمشاريع الصناعية.'
+        : 'Firefighting and alarm products — certified equipment supply for industrial projects.',
+      '/projects': language === 'ar'
+        ? 'مشاريع منفذة لأنظمة إنذار ومكافحة الحريق في مواقع صناعية داخل مصر.'
+        : 'Delivered fire alarm and firefighting projects across industrial sites in Egypt.',
+      '/calculator': language === 'ar'
+        ? 'حاسبة تقديرية لكمية FM-200 (لأغراض استرشادية فقط) وفق تقديرات NFPA 2001.'
+        : 'FM-200 preliminary estimator (indicative only) based on NFPA 2001 estimations.',
+      '/contact': language === 'ar'
+        ? 'تواصل مع سباركس للهندسة — فريق المبيعات والدعم الفني.'
+        : 'Contact Sparx Engineering — sales and technical support.',
+      '/about': language === 'ar'
+        ? 'عن سباركس للهندسة — حلول هندسية لأنظمة إنذار ومكافحة الحريق.'
+        : 'About Sparx Engineering — engineering solutions for fire safety systems.',
+      '/portfolio': language === 'ar'
+        ? 'ملف الأعمال — قصة التنفيذ من المعاينة إلى التسليم.'
+        : 'Portfolio — delivery story from survey to handover.'
+    };
+
+    const desc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (desc) desc.content = descMap[location] || descMap['/'];
+
     // Noindex admin pages
     const robots = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
     if (robots) {
@@ -59,6 +90,18 @@ function SeoManager() {
     if (canonical) {
       canonical.href = `https://sparx-engineering.com${location === '/' ? '/' : location}`;
     }
+
+    // Hreflang (same URL, language toggled in-app; still helps crawlers understand language availability)
+    const alternates = Array.from(document.querySelectorAll('link[rel="alternate"][hreflang]')) as HTMLLinkElement[];
+    alternates.forEach((l) => {
+      if (l.hreflang === 'en' || l.hreflang === 'ar' || l.hreflang === 'x-default') {
+        l.href = `https://sparx-engineering.com${location === '/' ? '/' : location}`;
+      }
+    });
+
+    // Open Graph URL
+    const ogUrl = document.querySelector('meta[property="og:url"]') as HTMLMetaElement | null;
+    if (ogUrl) ogUrl.content = `https://sparx-engineering.com${location === '/' ? '/' : location}`;
   }, [location, language, dir]);
 
   return null;

@@ -174,9 +174,17 @@
 
   /* Brutal micro-motions */
   .nb-pulse { animation: nb-pulse 1600ms ease-in-out infinite; }
+  .nb-jitter:hover { animation: nb-jitter 420ms steps(2, end) 1; }
   @keyframes nb-pulse {
     0%, 100% { transform: translateZ(0) scale(1); filter: saturate(1); }
     50% { transform: translateZ(0) scale(1.02); filter: saturate(1.12); }
+  }
+  @keyframes nb-jitter {
+    0% { transform: translate(0,0) rotate(0); }
+    25% { transform: translate(-2px, 1px) rotate(-0.2deg); }
+    50% { transform: translate(2px, -1px) rotate(0.2deg); }
+    75% { transform: translate(-1px, -2px) rotate(-0.15deg); }
+    100% { transform: translate(0,0) rotate(0); }
   }
 
   @keyframes marquee-x {

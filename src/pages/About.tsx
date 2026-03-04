@@ -72,6 +72,9 @@ export default function About() {
               src="https://images.unsplash.com/photo-1581094794329-cd2a1fb0e5d7?q=80&w=2070&auto=format&fit=crop" 
               className="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" 
               alt="Engineering Team" 
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
             />
             <div className="absolute bottom-0 left-0 bg-white p-6 shadow-lg border-t-4 border-secondary max-w-xs m-6 hidden md:block">
               <p className="font-display font-bold text-primary text-lg uppercase leading-tight">

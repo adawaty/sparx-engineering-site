@@ -68,7 +68,7 @@ export function Navigation() {
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
             {/* Logo */}
-            <img src={logoImg} alt="Sparx Engineering" className="h-[76px] w-auto object-contain transition-transform group-hover:scale-105" />
+            <img src={logoImg} alt="Sparx Engineering" loading="eager" decoding="async" className="h-[76px] w-auto object-contain transition-transform group-hover:scale-105" />
           </Link>
           
           {/* Desktop Menu */}
@@ -143,7 +143,7 @@ export function Footer() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         {/* Company Info */}
         <div className="md:col-span-1 space-y-6">
-          <img src={logoImg} alt="Sparx Engineering" className="h-20 w-auto object-contain opacity-95" />
+          <img src={logoImg} alt="Sparx Engineering" loading="lazy" decoding="async" className="h-20 w-auto object-contain opacity-95" />
           <p className="text-gray-400 text-sm leading-relaxed">
             {t('footer_desc')}
           </p>

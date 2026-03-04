@@ -18,6 +18,8 @@ export function PageHeader({ title, subtitle, backgroundImage, className }: Page
           <img 
             src={backgroundImage} 
             alt={title} 
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover opacity-40 scale-105 animate-pulse-slow" 
             style={{ animationDuration: '20s' }}
           />

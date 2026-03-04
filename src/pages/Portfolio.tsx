@@ -210,7 +210,7 @@ export default function Portfolio() {
                 <img src={`${import.meta.env.BASE_URL}brands/apollo-logo.png`} alt="Apollo" className="max-h-10 w-auto" loading="lazy" />
               </div>
               <div className="nb-card-sm p-4 flex items-center justify-center">
-                <img src="/src/assets/sri-logo.png" alt="SRI" className="max-h-10 w-auto" />
+                <img src={`${import.meta.env.BASE_URL}brands/sri-logo.png`} alt="SRI" loading="lazy" decoding="async" className="max-h-10 w-auto" />
               </div>
               <div className="col-span-3 text-xs text-muted-foreground">
                 {language === 'ar'
