@@ -15,6 +15,11 @@ const Contact = React.lazy(() => import("@/pages/Contact"));
 const AdminLogin = React.lazy(() => import("@/pages/AdminLogin"));
 const AdminDashboard = React.lazy(() => import("@/pages/AdminDashboard"));
 
+// Service landing pages
+const FirefightingSystems = React.lazy(() => import("@/pages/services/FirefightingSystems"));
+const FireAlarmSystems = React.lazy(() => import("@/pages/services/FireAlarmSystems"));
+const EngineeringConsulting = React.lazy(() => import("@/pages/services/EngineeringConsulting"));
+
 function ScrollHandler() {
   const [location] = useLocation();
   useEffect(() => {
@@ -38,6 +43,9 @@ function SeoManager() {
       '/about': language === 'ar' ? 'عن الشركة | سباركس للهندسة' : 'About | Sparx Engineering',
       '/products': language === 'ar' ? 'المنتجات | سباركس للهندسة' : 'Products | Sparx Engineering',
       '/services': language === 'ar' ? 'الخدمات | سباركس للهندسة' : 'Services | Sparx Engineering',
+      '/services/firefighting-systems': language === 'ar' ? 'أنظمة مكافحة الحريق | سباركس للهندسة' : 'Firefighting Systems | Sparx Engineering',
+      '/services/fire-alarm-systems': language === 'ar' ? 'أنظمة إنذار الحريق | سباركس للهندسة' : 'Fire Alarm Systems | Sparx Engineering',
+      '/services/engineering-consulting': language === 'ar' ? 'استشارات هندسية | سباركس للهندسة' : 'Engineering Consulting | Sparx Engineering',
       '/projects': language === 'ar' ? 'المشاريع | سباركس للهندسة' : 'Projects | Sparx Engineering',
       '/calculator': language === 'ar' ? 'حاسبة FM-200 | سباركس للهندسة' : 'FM-200 Calculator | Sparx Engineering',
       '/contact': language === 'ar' ? 'تواصل معنا | سباركس للهندسة' : 'Contact | Sparx Engineering',
@@ -55,6 +63,15 @@ function SeoManager() {
       '/services': language === 'ar'
         ? 'الخدمات: التصميم الهندسي، التوريد، التركيب والتشغيل، والصيانة الدورية لأنظمة مكافحة الحريق.'
         : 'Services: engineering design, supply, installation & commissioning, and preventive maintenance for fire protection systems.',
+      '/services/firefighting-systems': language === 'ar'
+        ? 'أنظمة مكافحة الحريق: رشاشات، صناديق حريق، شبكات خارجية، اختبار وتشغيل.'
+        : 'Firefighting systems: sprinklers, fire cabinets, external hydrants, testing & commissioning.',
+      '/services/fire-alarm-systems': language === 'ar'
+        ? 'أنظمة إنذار الحريق: كواشف، تقسيم مناطق، لوحات، تكامل وتشغيل.'
+        : 'Fire alarm systems: detectors, zoning, panels, integration and commissioning.',
+      '/services/engineering-consulting': language === 'ar'
+        ? 'استشارات هندسية: رسومات تنفيذية، حسابات، مراجعات وتنسيق قبل التسليم.'
+        : 'Engineering consulting: shop drawings, calculations, reviews and coordination before handover.',
       '/products': language === 'ar'
         ? 'معدات مكافحة الحريق والإنذار — توريد منتجات معتمدة وحلول متكاملة للمشاريع الصناعية.'
         : 'Firefighting and alarm products — certified equipment supply for industrial projects.',
@@ -138,6 +155,9 @@ export default function App() {
                 <Route path="/" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/services" component={Services} />
+              <Route path="/services/firefighting-systems" component={FirefightingSystems} />
+              <Route path="/services/fire-alarm-systems" component={FireAlarmSystems} />
+              <Route path="/services/engineering-consulting" component={EngineeringConsulting} />
               <Route path="/products" component={Products} />
               <Route path="/projects" component={Projects} />
               <Route path="/portfolio" component={Portfolio} />

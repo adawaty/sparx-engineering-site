@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Shield, Wrench, PenTool, HardHat } from 'lucide-react';
+import { ServiceDiagram } from '@/components/ServiceDiagram';
 
 // Images
 import servicesHeaderImg from '../assets/engineer-site-visit.jpeg';
@@ -90,6 +91,18 @@ export default function Services() {
                  <div className="bg-zinc-50 p-4 border border-zinc-200 rounded-none shadow-sm">
                     {service.icon}
                  </div>
+
+               <motion.div
+                 initial={{ opacity: 0, y: 12 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true, margin: "-80px" }}
+                 transition={{ duration: 0.55 }}
+               >
+                 <ServiceDiagram
+                   type={service.id as any}
+                   title={language === 'ar' ? 'مخطط مبسط للنظام' : 'System Diagram (Simplified)'}
+                 />
+               </motion.div>
                  <div className="h-px bg-zinc-200 flex-1"></div>
                  <span className="text-6xl font-display font-bold text-gray-100 select-none">0{index + 1}</span>
               </div>
@@ -116,13 +129,14 @@ export default function Services() {
               </Button>
             </div>
             
-            <div className="flex-1 w-full">
-               <div className="relative h-[400px] bg-zinc-100 w-full overflow-hidden group border border-zinc-200 nb-shadow">
+            <div className="flex-1 w-full space-y-4">
+               <div className="relative h-[400px] bg-zinc-100 w-full overflow-hidden group border-3 border-[var(--nb-stroke)] nb-shadow">
                   <img
                     src={service.image}
                     alt={language === 'ar' ? service.title.ar : service.title.en}
                     className="absolute inset-0 w-full h-full object-cover scale-[1.02] group-hover:scale-[1.06] transition-transform duration-700"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/65 via-primary/10 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10"></div>
                   <div className="absolute bottom-0 right-0 bg-secondary text-white p-4 z-20 border-l border-t border-white/10">
