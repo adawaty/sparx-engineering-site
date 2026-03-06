@@ -21,6 +21,21 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://sparx-engineering.com/services/firefighting-systems</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sparx-engineering.com/services/fire-alarm-systems</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://sparx-engineering.com/services/engineering-consulting</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://sparx-engineering.com/projects</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

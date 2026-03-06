@@ -13,6 +13,11 @@ import heroImg from '../assets/hero-engineering-banner.jpeg';
 import fireExtImg from '../assets/fire-extinguisher-product.jpeg';
 import alarmPanelImg from '../assets/fire-alarm-panel.jpeg';
 import projectImg from '../assets/project-textile-factory.jpeg';
+
+// Trust section images (local assets)
+import servicesHeaderImg from '../assets/engineer-site-visit.jpeg';
+import servicesMaintenanceImg from '../assets/services-maintenance.jpg';
+import servicesInstallationImg from '../assets/services-installation.jpg';
 const logoMeteory = `${import.meta.env.BASE_URL}brands/meteory-logo.png`;
 const logoApollo  = `${import.meta.env.BASE_URL}brands/apollo-logo.png`;
 
@@ -353,6 +358,101 @@ export default function Home() {
             {language === 'ar'
               ? `ملاحظة: هذه لقطة موجزة حتى فبراير 2026 ويمكن تحديثها عند توفر بيانات تفصيلية (سجل مشاريع/شهادات).`
               : `Note: this is a brief snapshot as of Feb 2026 and can be updated once detailed evidence is provided (project register/certificates).`}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust   Proof */}
+      <section className="py-24 bg-white border-t-2 border-[var(--nb-stroke)]">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <div className="text-xs font-bold uppercase tracking-[0.24em] text-muted-foreground">
+                {language === 'ar' ? 'الثقة في الميدان' : 'Trust in the Field'}
+              </div>
+              <h2 className="mt-3 text-4xl font-display font-bold text-primary uppercase">
+                {language === 'ar' ? 'صور من التنفيذ' : 'Team  Sites in Action'}
+              </h2>
+              <p className="mt-4 text-zinc-600 max-w-2xl">
+                {language === 'ar'
+                  ? 'لقطات واقعية من بيئات صناعية: معاينات الموقع، لوحات التحكم، وشبكات المواسير.'
+                  : 'Real-world glimpses from industrial environments: site surveys, control panels, and piping networks.'}
+              </p>
+            </div>
+
+            <div className="border-3 border-[var(--nb-stroke)] bg-white nb-shadow-sm px-4 py-3 text-xs text-muted-foreground">
+              <strong className="text-primary">{language === 'ar' ? 'ملاحظة:' : 'Note:'}</strong>{' '}
+              {language === 'ar'
+                ? 'قسم العملاء والشعارات التفصيلية يمكن إضافته عند تزويدنا بقائمة العملاء/التصاريح.'
+                : 'A dedicated client-logo section can be added once you provide an approved client list/logos.'}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[{
+              img: servicesHeaderImg,
+              title: language === 'ar' ? 'معاينة موقع' : 'Site Survey',
+              desc: language === 'ar' ? 'تحديد المخاطر ومسارات التنفيذ.' : 'Risk mapping and execution routing.'
+            },{
+              img: servicesMaintenanceImg,
+              title: language === 'ar' ? 'اختبارات لوحة تحكم' : 'Panel Testing',
+              desc: language === 'ar' ? 'تأكيد التكامل ووظائف النظام.' : 'Verify integration and system logic.'
+            },{
+              img: servicesInstallationImg,
+              title: language === 'ar' ? 'شبكات مواسير' : 'Piping Network',
+              desc: language === 'ar' ? 'تنفيذ ميداني وفق الرسومات.' : 'Field execution aligned with drawings.'
+            }].map((c, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+                transition={{ duration: 0.55, delay: i * 0.06 }}
+                className="nb-card nb-hover-lift overflow-hidden"
+              >
+                <div className="relative h-56">
+                  <img src={c.img} alt={c.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/10 to-transparent" />
+                </div>
+                <div className="p-6">
+                  <div className="text-lg font-display font-bold text-primary uppercase">{c.title}</div>
+                  <div className="mt-2 text-sm text-zinc-600">{c.desc}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-14">
+            <div className="text-xs font-bold uppercase tracking-[0.24em] text-muted-foreground">
+              {language === 'ar' ? 'شركاء وتقنيات' : 'Brands  Technology Partners'}
+            </div>
+            <div className="mt-4 border-3 border-[var(--nb-stroke)] bg-white nb-shadow">
+              <div className="marquee px-6 py-4">
+                <div className="marquee-track opacity-90">
+                  {[
+                    { type: 'img', src: logoMeteory, label: 'Meteory' },
+                    { type: 'img', src: logoApollo, label: 'Apollo' },
+                    { type: 'text', label: 'SRI Malaysia' },
+                    { type: 'text', label: 'NAFFCO' },
+                    { type: 'text', label: 'BAVARIA' },
+                  ].concat([
+                    { type: 'img', src: logoMeteory, label: 'Meteory' },
+                    { type: 'img', src: logoApollo, label: 'Apollo' },
+                    { type: 'text', label: 'SRI Malaysia' },
+                    { type: 'text', label: 'NAFFCO' },
+                    { type: 'text', label: 'BAVARIA' },
+                  ]).map((p, idx) => (
+                    <div key={idx} className="marquee-item grayscale hover:grayscale-0 transition">
+                      {p.type === 'img' ? (
+                        <img src={p.src} alt={p.label} className="h-8 w-auto object-contain" loading="lazy" decoding="async" />
+                      ) : (
+                        <span className="font-display font-bold text-xl text-primary tracking-widest uppercase">{p.label}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
