@@ -4,7 +4,8 @@ import { PageHeader } from '../components/ui/PageHeader';
 import { AnimatedCard } from '../components/ui/AnimatedCard';
 import { Badge } from "@/components/ui/badge";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Warehouse, Home, Factory, X, ArrowRight } from 'lucide-react';
+import { Building2, Factory, X, ArrowRight, Mail, MessageSquare } from 'lucide-react';
+import { buildMailto, buildWhatsApp } from '@/lib/quoteLinks';
 
 // Images
 import projectsHeaderImg from '../assets/project-textile-factory.jpeg';
@@ -80,62 +81,6 @@ export default function Projects() {
           { ar: 'تقدير كميات الغاز وفق NFPA 2001 (استرشادي)', en: 'NFPA 2001-based agent estimation (indicative)' },
           { ar: 'تكامل كامل مع الإنذار والتحكم', en: 'Full alarm + control integration' },
           { ar: 'اختبارات إطلاق ومحاكاة سيناريوهات', en: 'Release testing and scenario simulation' }
-        ]
-      }
-    },
-    {
-      id: 3,
-      title: { ar: 'مستودعات شركة الأدوية', en: 'Pharma Warehouses' },
-      category: 'Industrial',
-      location: { ar: 'المنطقة الصناعية - أكتوبر', en: '6th of October Industrial Zone' },
-      system: { ar: 'صناديق حريق + كواشف دخان', en: 'Fire Cabinets + Smoke Detectors' },
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop',
-      icon: <Warehouse className="w-6 h-6" />,
-      caseStudy: {
-        challenge: {
-          ar: 'مستودعات تخزين تتطلب إنذار مبكر وتوزيع نقاط مكافحة بالحريق مع سهولة الوصول لفرق التشغيل.',
-          en: 'Storage warehouses requiring early detection and well-placed firefighting points with easy access for operators.'
-        },
-        solution: {
-          ar: 'توريد وتركيب صناديق حريق، تمديدات مناسبة، وتركيب كواشف دخان وتحديد مناطق الإنذار وربطها بلوحة التحكم.',
-          en: 'Supply and install fire cabinets, suitable piping, smoke detection with zoning and control panel integration.'
-        },
-        outcome: {
-          ar: 'تسليم مخطط مناطق الإنذار، قائمة المعدات، وتقارير اختبارات التشغيل الأساسية وصيانة دورية مقترحة.',
-          en: 'Delivered alarm zoning plan, equipment list, basic functional test reports, and recommended periodic maintenance schedule.'
-        },
-        highlights: [
-          { ar: 'تحديد مسارات الوصول والمخارج', en: 'Access and egress-aware placement' },
-          { ar: 'اختبارات كواشف ومجسات الإنذار', en: 'Detector and panel functional tests' },
-          { ar: 'تجهيز نقاط مكافحة للحريق داخل المخزن', en: 'Warehouse-ready firefighting points' }
-        ]
-      }
-    },
-    {
-      id: 4,
-      title: { ar: 'كمبوند الياسمين', en: 'Al-Yasmeen Compound' },
-      category: 'Residential',
-      location: { ar: 'العاصمة الإدارية', en: 'New Administrative Capital' },
-      system: { ar: 'شبكة حريق خارجية + أعمدة', en: 'External Hydrant Network' },
-      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop',
-      icon: <Home className="w-6 h-6" />,
-      caseStudy: {
-        challenge: {
-          ar: 'مساحات سكنية كبيرة تتطلب شبكة خارجية موثوقة (Hydrants) وتوزيع نقاط تغذية لخدمات الطوارئ.',
-          en: 'Large residential compound requiring a reliable external hydrant network and clear feed points for emergency response.'
-        },
-        solution: {
-          ar: 'تصميم شبكة حريق خارجية وأعمدة حريق، تحديد الأقطار ومسارات الدفن، وتنسيق نقاط الربط واختبارات الضغط.',
-          en: 'Design of external hydrant network, pipe sizing and routing, connection point coordination, and pressure testing.'
-        },
-        outcome: {
-          ar: 'تسليم رسومات تنفيذية للشبكة الخارجية مع نتائج اختبارات الضغط وتوصيات تشغيل وصيانة.',
-          en: 'Delivered external network shop drawings with pressure test results and OM recommendations.'
-        },
-        highlights: [
-          { ar: 'تخطيط تغذية خارجية حسب مراحل المشروع', en: 'Phase-aware external supply planning' },
-          { ar: 'اختبارات ضغط للشبكة والأعمدة', en: 'Network and hydrant pressure testing' },
-          { ar: 'تسليم دليل تشغيل وصيانة مبسط', en: 'Simplified operations  maintenance guide' }
         ]
       }
     },
@@ -255,16 +200,29 @@ export default function Projects() {
                       </ul>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                    <div className="grid sm:grid-cols-2 gap-3 pt-2">
                       <a
-                        href="/contact"
+                        href={buildWhatsApp(`Quote request: ${language === 'ar' ? active.title.ar : active.title.en}`)}
+                        target="_blank"
+                        rel="noreferrer"
                         className="inline-flex items-center justify-center border-3 border-[var(--nb-stroke)] bg-secondary text-white px-5 py-3 font-bold uppercase tracking-widest nb-shadow hover:-translate-x-1 hover:-translate-y-1 transition-transform"
                       >
-                        {language === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote'}
+                        {language === 'ar' ? 'طلب عرض سعر واتساب' : 'Request Quote (WhatsApp)'}
+                        <MessageSquare className="ml-2 w-4 h-4" />
                       </a>
                       <a
-                        href="/services"
+                        href={buildMailto(`Quote Request - ${language === 'ar' ? active.title.ar : active.title.en}`, `Project: ${language === 'ar' ? active.title.ar : active.title.en}`)}
                         className="inline-flex items-center justify-center border-3 border-[var(--nb-stroke)] bg-white text-primary px-5 py-3 font-bold uppercase tracking-widest nb-shadow-sm hover:-translate-x-1 hover:-translate-y-1 transition-transform"
+                      >
+                        {language === 'ar' ? 'طلب عرض سعر بريد' : 'Request Quote (Email)'}
+                        <Mail className="ml-2 w-4 h-4" />
+                      </a>
+                    </div>
+
+                    <div className="pt-2">
+                      <a
+                        href="/services"
+                        className="inline-flex items-center justify-center border-2 border-[var(--nb-stroke)] bg-white px-5 py-3 font-bold uppercase tracking-widest text-xs text-primary nb-shadow-sm hover:-translate-x-1 hover:-translate-y-1 transition-transform"
                       >
                         {language === 'ar' ? 'استعرض الخدمات' : 'View Services'}
                       </a>

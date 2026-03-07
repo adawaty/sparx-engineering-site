@@ -12,8 +12,6 @@ const Projects = React.lazy(() => import("@/pages/Projects"));
 const Portfolio = React.lazy(() => import("@/pages/Portfolio"));
 const CalculatorPage = React.lazy(() => import("@/pages/Calculator"));
 const Contact = React.lazy(() => import("@/pages/Contact"));
-const AdminLogin = React.lazy(() => import("@/pages/AdminLogin"));
-const AdminDashboard = React.lazy(() => import("@/pages/AdminDashboard"));
 
 // Service landing pages
 const FirefightingSystems = React.lazy(() => import("@/pages/services/FirefightingSystems"));
@@ -49,8 +47,6 @@ function SeoManager() {
       '/projects': language === 'ar' ? 'المشاريع | سباركس للهندسة' : 'Projects | Sparx Engineering',
       '/calculator': language === 'ar' ? 'حاسبة FM-200 | سباركس للهندسة' : 'FM-200 Calculator | Sparx Engineering',
       '/contact': language === 'ar' ? 'تواصل معنا | سباركس للهندسة' : 'Contact | Sparx Engineering',
-      '/admin': 'Admin | Sparx Engineering',
-      '/admin/dashboard': 'Admin Dashboard | Sparx Engineering'
     };
 
     document.title = titleMap[location] || 'Sparx Engineering';
@@ -95,12 +91,9 @@ function SeoManager() {
     const desc = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (desc) desc.content = descMap[location] || descMap['/'];
 
-    // Noindex admin pages
+    // Robots
     const robots = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
-    if (robots) {
-      if (location.startsWith('/admin')) robots.content = 'noindex,nofollow';
-      else robots.content = 'index,follow';
-    }
+    if (robots) robots.content = 'index,follow';
 
     // Canonical
     const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
@@ -163,8 +156,6 @@ export default function App() {
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/calculator" component={CalculatorPage} />
               <Route path="/contact" component={Contact} />
-              <Route path="/admin" component={AdminLogin} />
-              <Route path="/admin/dashboard" component={AdminDashboard} />
 
               <Route>
                 <div className="container mx-auto py-20 text-center">

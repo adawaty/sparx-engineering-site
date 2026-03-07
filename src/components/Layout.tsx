@@ -214,7 +214,6 @@ export function Footer() {
           <div className="flex gap-6">
             <span className="hover:text-white cursor-pointer">Privacy Policy</span>
             <span className="hover:text-white cursor-pointer">Terms & Conditions</span>
-            <Link href="/admin" className="hover:text-white cursor-pointer transition-colors text-gray-500 text-xs">Admin</Link>
           </div>
         </div>
       </div>

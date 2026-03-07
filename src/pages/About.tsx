@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 
 // Images
 import aboutHeaderImg from '../assets/hero-engineering-banner.jpeg';
+import aboutStoryImg from '../assets/engineer-site-visit.jpeg';
 
 export default function About() {
   const { t, language } = useLanguage();
@@ -69,7 +70,7 @@ export default function About() {
           >
             <div className="absolute inset-0 bg-secondary/10 transform translate-x-4 translate-y-4 -z-10"></div>
             <img 
-              src="https://images.unsplash.com/photo-1581094794329-cd2a1fb0e5d7?q=80&w=2070&auto=format&fit=crop" 
+              src={aboutStoryImg} 
               className="w-full h-[500px] object-cover shadow-2xl grayscale hover:grayscale-0 transition-all duration-700" 
               alt="Engineering Team" 
               loading="lazy"
