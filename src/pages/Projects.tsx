@@ -158,7 +158,7 @@ export default function Projects() {
         <AnimatePresence>
           {active && (
             <motion.div
-              className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm"
+              className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm overflow-y-auto overscroll-contain p-4 md:p-10"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -169,7 +169,7 @@ export default function Projects() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 18, scale: 0.98 }}
                 transition={{ duration: 0.25 }}
-                className="mx-auto mt-16 w-[min(960px,92vw)] nb-card bg-white"
+                className="mx-auto my-10 w-[min(960px,92vw)] nb-card bg-white"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="flex items-start justify-between gap-6 p-6 border-b-3 border-[var(--nb-stroke)]">
