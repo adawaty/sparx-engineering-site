@@ -10,8 +10,14 @@ import { Input } from "@/components/ui/input";
 
 // Images
 import productsHeaderImg from '../assets/fire-extinguisher-product.jpeg';
-import fireExtImg from '../assets/fire-extinguisher-product.jpeg';
-import alarmPanelImg from '../assets/fire-alarm-panel.jpeg';
+
+// Public product images (cacheable, brand-accurate)
+const imgMeteoryDryPowder = `${import.meta.env.BASE_URL}products/meteory-drypowder.jpg`;
+const imgMeteoryCO2 = `${import.meta.env.BASE_URL}products/meteory-co2.jpg`;
+const imgApolloSeries65 = `${import.meta.env.BASE_URL}products/apollo-series65.jpg`;
+const imgApolloOrbisHeat = `${import.meta.env.BASE_URL}products/apollo-orbis-heat.jpg`;
+const imgSRISuppression = `${import.meta.env.BASE_URL}products/sri-suppression-cylinder.jpg`;
+const imgMeteoryKitchen = `${import.meta.env.BASE_URL}products/meteory-kitchen-system.jpg`;
 
 export default function Products() {
   const { t, language } = useLanguage();
@@ -28,7 +34,7 @@ export default function Products() {
       name: { ar: 'طفاية بودرة كيميائية جافة', en: 'Dry Chemical Powder Extinguisher' },
       model: 'PD-6',
       specs: { ar: 'سعة 6 كجم - ضغط مخزن - مناسب للحرائق A, B, C', en: '6kg Capacity - Stored Pressure - Suitable for A, B, C Class Fires' },
-      image: fireExtImg
+      image: imgMeteoryDryPowder
     },
     {
       id: 2,
@@ -37,7 +43,7 @@ export default function Products() {
       name: { ar: 'طفاية ثاني أكسيد الكربون', en: 'CO2 Fire Extinguisher' },
       model: 'CD-5',
       specs: { ar: 'سعة 5 كجم - مناسب للحرائق الكهربائية B, C', en: '5kg Capacity - Suitable for Electrical Fires B, C' },
-      image: fireExtImg
+      image: imgMeteoryCO2
     },
     {
       id: 3,
@@ -46,7 +52,7 @@ export default function Products() {
       name: { ar: 'كاشف دخان ضوئي', en: 'Optical Smoke Detector' },
       model: 'Series 65',
       specs: { ar: 'كشف سريع للدخان - تقنية التشتت الضوئي', en: 'Fast Smoke Detection - Light Scattering Technology' },
-      image: alarmPanelImg
+      image: imgApolloSeries65
     },
     {
       id: 4,
@@ -55,7 +61,7 @@ export default function Products() {
       name: { ar: 'كاشف حراري', en: 'Heat Detector' },
       model: 'Orbis',
       specs: { ar: 'استجابة سريعة للارتفاع المفاجئ في الحرارة', en: 'Rapid Response to Sudden Heat Rise' },
-      image: alarmPanelImg
+      image: imgApolloOrbisHeat
     },
     {
       id: 5,
@@ -64,7 +70,7 @@ export default function Products() {
       name: { ar: 'نظام إطفاء FM-200', en: 'FM-200 Suppression System' },
       model: 'Engineered',
       specs: { ar: 'نظام غمر كلي لغرف السيرفرات - صديق للبيئة', en: 'Total Flooding for Server Rooms - Eco-friendly' },
-      image: productsHeaderImg
+      image: imgSRISuppression
     },
     {
       id: 6,
@@ -73,7 +79,7 @@ export default function Products() {
       name: { ar: 'نظام إطفاء مطابخ', en: 'Kitchen Hood System' },
       model: 'Wet Chemical',
       specs: { ar: 'حماية فعالة للزيوت والشحوم - معتمد UL', en: 'Effective Oil & Grease Protection - UL Listed' },
-      image: productsHeaderImg
+      image: imgMeteoryKitchen
     },
   ];
 

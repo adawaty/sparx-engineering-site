@@ -20,6 +20,8 @@ import servicesMaintenanceImg from '../assets/services-maintenance.jpg';
 import servicesInstallationImg from '../assets/services-installation.jpg';
 const logoMeteory = `${import.meta.env.BASE_URL}brands/meteory-logo.png`;
 const logoApollo  = `${import.meta.env.BASE_URL}brands/apollo-logo.png`;
+const logoSRI     = `${import.meta.env.BASE_URL}brands/sri-logo.svg`;
+const logoNAFFCO  = `${import.meta.env.BASE_URL}brands/naffco-logo.png`;
 
 export default function Home() {
   const { t, language } = useLanguage();
@@ -112,15 +114,13 @@ export default function Home() {
               {[
                 { type: 'img', src: logoMeteory, label: 'Meteory' },
                 { type: 'img', src: logoApollo, label: 'Apollo' },
-                { type: 'text', label: 'SRI Malaysia' },
-                { type: 'text', label: 'NAFFCO' },
-                { type: 'text', label: 'BAVARIA' },
+                { type: 'img', src: logoSRI, label: 'SRI Malaysia' },
+                { type: 'img', src: logoNAFFCO, label: 'NAFFCO' },
               ].concat([
                 { type: 'img', src: logoMeteory, label: 'Meteory' },
                 { type: 'img', src: logoApollo, label: 'Apollo' },
-                { type: 'text', label: 'SRI Malaysia' },
-                { type: 'text', label: 'NAFFCO' },
-                { type: 'text', label: 'BAVARIA' },
+                { type: 'img', src: logoSRI, label: 'SRI Malaysia' },
+                { type: 'img', src: logoNAFFCO, label: 'NAFFCO' },
               ]).map((p, i) => (
                 <div key={i} className="marquee-item">
                   {p.type === 'img' ? (
@@ -362,7 +362,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust   Proof */}
+      {/* Trust Proof */}
       <section className="py-24 bg-white border-t-2 border-[var(--nb-stroke)]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
@@ -371,7 +371,7 @@ export default function Home() {
                 {language === 'ar' ? 'الثقة في الميدان' : 'Trust in the Field'}
               </div>
               <h2 className="mt-3 text-4xl font-display font-bold text-primary uppercase">
-                {language === 'ar' ? 'صور من التنفيذ' : 'Team  Sites in Action'}
+                {language === 'ar' ? 'صور من التنفيذ' : 'Team & Sites in Action'}
               </h2>
               <p className="mt-4 text-zinc-600 max-w-2xl">
                 {language === 'ar'
@@ -424,7 +424,7 @@ export default function Home() {
 
           <div className="mt-14">
             <div className="text-xs font-bold uppercase tracking-[0.24em] text-muted-foreground">
-              {language === 'ar' ? 'شركاء وتقنيات' : 'Brands  Technology Partners'}
+              {language === 'ar' ? 'شركاء وتقنيات' : 'Brands & Technology Partners'}
             </div>
             <div className="mt-4 border-3 border-[var(--nb-stroke)] bg-white nb-shadow">
               <div className="marquee px-6 py-4">
@@ -432,15 +432,13 @@ export default function Home() {
                   {[
                     { type: 'img', src: logoMeteory, label: 'Meteory' },
                     { type: 'img', src: logoApollo, label: 'Apollo' },
-                    { type: 'text', label: 'SRI Malaysia' },
-                    { type: 'text', label: 'NAFFCO' },
-                    { type: 'text', label: 'BAVARIA' },
+                    { type: 'img', src: logoSRI, label: 'SRI Malaysia' },
+                    { type: 'img', src: logoNAFFCO, label: 'NAFFCO' },
                   ].concat([
                     { type: 'img', src: logoMeteory, label: 'Meteory' },
                     { type: 'img', src: logoApollo, label: 'Apollo' },
-                    { type: 'text', label: 'SRI Malaysia' },
-                    { type: 'text', label: 'NAFFCO' },
-                    { type: 'text', label: 'BAVARIA' },
+                    { type: 'img', src: logoSRI, label: 'SRI Malaysia' },
+                    { type: 'img', src: logoNAFFCO, label: 'NAFFCO' },
                   ]).map((p, idx) => (
                     <div key={idx} className="marquee-item grayscale hover:grayscale-0 transition">
                       {p.type === 'img' ? (
